@@ -1,0 +1,48 @@
+#include <collections/vector2.hfa>
+#include <fstream.hfa>
+#include <stdlib.hfa>
+
+forall(E | { int ?<?(E, E); }) {
+    void vector_qsort(vector(E) & vec) {
+        E * start = vec.buffer_first_$;
+        size_t length = vec`length;
+
+        qsort(start, length);
+    }
+}
+
+unsigned int part1() {
+    vector(int) list1 = { 5 };
+    vector(int) list2 = { 5 };
+
+    int id1;
+    int id2;
+    while () {
+        sin | id1;
+        if (eof(sin)) break;
+        sin | id2;
+
+        push_last(list1, id1);
+        push_last(list2, id2);
+    }
+
+    vector_qsort(list1);
+    vector_qsort(list2);
+
+    unsigned int sum_of_differences = 0;
+    for (i; list1`length) {
+        unsigned int absolute_difference = list1[i]`val > list2[i]`val
+            ? list1[i]`val - list2[i]`val
+            : list2[i]`val - list1[i]`val;
+
+        sum_of_differences += absolute_difference;
+    }
+
+    return sum_of_differences;
+}
+
+int main() {
+    unsigned int result = part1();
+
+    sout | result;
+}
